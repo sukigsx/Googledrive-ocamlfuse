@@ -359,6 +359,7 @@ case $opcion in
             sudo chmod +x $ruta/*.sukigsx.sh
             sudo cp -r /tmp/temporal_update/codigo/* $ruta
             sudo rm -r /tmp/temporal_update
+            clear
             echo "-----------------------------------------------------------------------------------------------------------------------------------------------";
             echo -e "-${verde} Script actualizado, tienes que reiniciar el script para ver los cambios.${borra_colores}";
             echo "-----------------------------------------------------------------------------------------------------------------------------------------------";
@@ -373,6 +374,7 @@ case $opcion in
             sudo chmod +x $ruta/*.sukigsx.sh
             sudo cp -r /tmp/temporal_update/codigo/* $ruta
             sudo rm -r /tmp/temporal_update
+            clear
             echo "-----------------------------------------------------------------------------------------------------------------------------------------------";
             echo -e "-${verde} Script actualizado, tienes que reiniciar el script para ver los cambios.${borra_colores}";
             echo "-----------------------------------------------------------------------------------------------------------------------------------------------";
