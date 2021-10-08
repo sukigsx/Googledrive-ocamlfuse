@@ -96,7 +96,7 @@ echo -e "-  5. ${rojo}Ver / editar fichero crontab.${borra_colores}             
 echo -e "-  6. ${rojo}Borrar conexiones.${borra_colores}                                                                                                                      -"
 echo "-                                                                                                                                             -"
 echo "-----------------------------------------------------------------------------------------------------------------------------------------------"
-echo "- 70. Actualizar este script.                                                                                                                                            -"
+echo -e "- 70. ${turquesa}Actualizar este script.${borra_colores}                                                                                                                                            -"
 echo "-----------------------------------------------------------------------------------------------------------------------------------------------"
 echo "- 80. Ver el repositorio del creador.                                                                                                         -"
 echo "- 90. Manual de funcionamiento                                                                                                                -"
