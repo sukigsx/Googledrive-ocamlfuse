@@ -85,6 +85,8 @@ echo -e "-${verde} Descripcion.${borra_colores}     Utilidad para sincronizar tu
 echo -e "-${verde} Funcionamiento.${borra_colores}  Ver manual de funcionamiento, opcion 90 del menu.                                                                          -"
 echo "-                                                                                                                                             -"
 echo "-----------------------------------------------------------------------------------------------------------------------------------------------"
+echo -e "-  0. ${turquesa}Actualizar este script.${borra_colores}                                                                                                                                            -"
+echo "-----------------------------------------------------------------------------------------------------------------------------------------------"
 echo "-                                                                                                                                             -"
 echo "-  1. Instalar/Configurar/Crear conexiones nuevas.                                                                                            -"
 echo "-  2. Ver conexiones actuales.                                                                                                                -"
@@ -96,8 +98,6 @@ echo -e "-  5. ${rojo}Ver / editar fichero crontab.${borra_colores}             
 echo -e "-  6. ${rojo}Borrar conexiones.${borra_colores}                                                                                                                      -"
 echo "-                                                                                                                                             -"
 echo "-----------------------------------------------------------------------------------------------------------------------------------------------"
-echo -e "- 70. ${turquesa}Actualizar este script.${borra_colores}                                                                                                                                            -"
-echo "-----------------------------------------------------------------------------------------------------------------------------------------------"
 echo "- 80. Ver el repositorio del creador.                                                                                                         -"
 echo "- 90. Manual de funcionamiento                                                                                                                -"
 echo "- 99. Atras / Salir                                                                                                                           -"
@@ -106,6 +106,60 @@ echo "--------------------------------------------------------------------------
 echo -n "- Seleccione una opcion del menu -->> "
 read opcion
 case $opcion in
+    
+    0) #actualiza el script
+        which git 2>/dev/null 1>/dev/null 0>/dev/null #comprueba si esta el programa llamado programa
+        git=$? #recojemos el 0 o 1 del resultado de which
+        contador="1" #ponemos la variable contador a 1
+        while [ $git -gt 0 ] #entra en el bicle si variable programa es 0, no lo ha encontrado which
+        do
+            if [ $contador = "4" ] #si el contador es 4 entre en then y sino en else
+            then #si entra en then es porque el contador es igual a 4 y no ha podido instalar
+                echo "-----------------------------------------------------------------------------------------------------------------------------------------------"
+                echo -e "-                            ${rojo}NO se ha detectado conexion a internet, No se puede ejecutar el script.${borra_colores}                                          -"
+                echo "-----------------------------------------------------------------------------------------------------------------------------------------------"
+                read pause
+                exit
+        else #intenta instalar
+            sudo apt install git -y
+            let "contador=contador+1" #incrementa la variable contador en 1
+            which git 2>/dev/null 1>/dev/null 0>/dev/null #comprueba si esta el programa en tu sistema
+            git=$? ##recojemos el 0 o 1 del resultado de which
+        fi
+        done
+    
+    if [ -e /usr/bin/ocamlfuse.sukigsx.sh ] #comprueba si se ha instalado el script con el deb, comprobando el fichero /usr/bin/inicio.ocamlfuse.sh
+        then
+            ruta="/usr/bin"
+            cd /tmp
+            mkdir temporal_update
+            git clone https://github.com/sukigsx/Googledrive-ocamlfuse.git /tmp/temporal_update
+            cd /tmp/temporal_update/codigo/
+            sudo chmod +x $ruta/*.sukigsx.sh
+            sudo cp -r /tmp/temporal_update/codigo/* $ruta
+            sudo rm -r /tmp/temporal_update
+            clear
+            echo "-----------------------------------------------------------------------------------------------------------------------------------------------";
+            echo -e "-${verde} Script actualizado, tienes que reiniciar el script para ver los cambios.${borra_colores}";
+            echo "-----------------------------------------------------------------------------------------------------------------------------------------------";
+            read pasue
+            exit;
+        else
+            ruta=$(pwd)
+            cd /tmp
+            mkdir temporal_update
+            git clone https://github.com/sukigsx/Googledrive-ocamlfuse.git /tmp/temporal_update
+            cd /tmp/temporal_update/codigo/
+            sudo chmod +x $ruta/*.sukigsx.sh
+            sudo cp -r /tmp/temporal_update/codigo/* $ruta
+            sudo rm -r /tmp/temporal_update
+            clear
+            echo "-----------------------------------------------------------------------------------------------------------------------------------------------";
+            echo -e "-${verde} Script actualizado, tienes que reiniciar el script para ver los cambios.${borra_colores}";
+            echo "-----------------------------------------------------------------------------------------------------------------------------------------------";
+            read pasue
+            exit;
+        fi;;
     
     1)  #Instalar/Configurar/Crear conexiones nuevas
         which google-drive-ocamlfuse 2>/dev/null 0>/dev/null
@@ -327,60 +381,6 @@ case $opcion in
 		echo -e "- ${amarillo}No lo has escrito correctamente o bien no existe.${borra_colores}"
 		read pause
 	fi;;
-	
-	70) #actualiza el script
-        which git 2>/dev/null 1>/dev/null 0>/dev/null #comprueba si esta el programa llamado programa
-        git=$? #recojemos el 0 o 1 del resultado de which
-        contador="1" #ponemos la variable contador a 1
-        while [ $git -gt 0 ] #entra en el bicle si variable programa es 0, no lo ha encontrado which
-        do
-            if [ $contador = "4" ] #si el contador es 4 entre en then y sino en else
-            then #si entra en then es porque el contador es igual a 4 y no ha podido instalar
-                echo "-----------------------------------------------------------------------------------------------------------------------------------------------"
-                echo -e "-                            ${rojo}NO se ha detectado conexion a internet, No se puede ejecutar el script.${borra_colores}                                          -"
-                echo "-----------------------------------------------------------------------------------------------------------------------------------------------"
-                read pause
-                exit
-        else #intenta instalar
-            sudo apt install git -y
-            let "contador=contador+1" #incrementa la variable contador en 1
-            which git 2>/dev/null 1>/dev/null 0>/dev/null #comprueba si esta el programa en tu sistema
-            git=$? ##recojemos el 0 o 1 del resultado de which
-        fi
-        done
-    
-    if [ -e /usr/bin/ocamlfuse.sukigsx.sh ] #comprueba si se ha instalado el script con el deb, comprobando el fichero /usr/bin/inicio.ocamlfuse.sh
-        then
-            ruta="/usr/bin"
-            cd /tmp
-            mkdir temporal_update
-            git clone https://github.com/sukigsx/Googledrive-ocamlfuse.git /tmp/temporal_update
-            cd /tmp/temporal_update/codigo/
-            sudo chmod +x $ruta/*.sukigsx.sh
-            sudo cp -r /tmp/temporal_update/codigo/* $ruta
-            sudo rm -r /tmp/temporal_update
-            clear
-            echo "-----------------------------------------------------------------------------------------------------------------------------------------------";
-            echo -e "-${verde} Script actualizado, tienes que reiniciar el script para ver los cambios.${borra_colores}";
-            echo "-----------------------------------------------------------------------------------------------------------------------------------------------";
-            read pasue
-            exit;
-        else
-            ruta=$(pwd)
-            cd /tmp
-            mkdir temporal_update
-            git clone https://github.com/sukigsx/Googledrive-ocamlfuse.git /tmp/temporal_update
-            cd /tmp/temporal_update/codigo/
-            sudo chmod +x $ruta/*.sukigsx.sh
-            sudo cp -r /tmp/temporal_update/codigo/* $ruta
-            sudo rm -r /tmp/temporal_update
-            clear
-            echo "-----------------------------------------------------------------------------------------------------------------------------------------------";
-            echo -e "-${verde} Script actualizado, tienes que reiniciar el script para ver los cambios.${borra_colores}";
-            echo "-----------------------------------------------------------------------------------------------------------------------------------------------";
-            read pasue
-            exit;
-        fi;;
 	
     80)  clear
         echo "-----------------------------------------------------------------------------------------------------------------------------------------------"
