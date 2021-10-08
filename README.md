@@ -24,22 +24,22 @@ Sus opciones, son las siguientes:
 ### INSTALACION.
 
 #### Descargar e instalar el paquete DEB.
-- [Descargar el paque DEB](https://github.com/sukigsx/Google-drive-ocamlfuse/raw/main/Google-drive-ocamlfuse.deb). Y lo puedes instalar con tu forma habitual.
+- [Descargar el paque DEB](https://github.com/sukigsx/Googledrive-ocamlfuse/raw/main/Googledrive-ocamlfuse.deb). Y lo puedes instalar con tu forma habitual.
 - Instalar paquete DEB desde linea de comando en la terminal,lo descarga, lo instala y despues borra el paquete DEB.
 
-      wget https://github.com/sukigsx/Google-drive-ocamlfuse/raw/main/Google-drive-ocamlfuse.deb; sudo dpkg -i Google-drive-ocamlfuse.deb; rm Google-drive-ocamlfuse.deb
+      wget https://github.com/sukigsx/Googledrive-ocamlfuse/raw/main/Googledrive-ocamlfuse.deb; sudo dpkg -i Googledrive-ocamlfuse.deb; rm Googledrive-ocamlfuse.deb
       
  - Clonar el repositorio, desde la terminal. Dar permisos de ejecucion a todos los ficheros.
  
-       git clone https://github.com/sukigsx/Google-drive-ocamlfuse.git
+       git clone https://github.com/sukigsx/Googledrive-ocamlfuse.git
      
 #### Desistalar el paquete deb, desde el terminal.
-     sudo dpkg -r google-drive-ocamlfuse
+     sudo dpkg -r googledrive-ocamlfuse
 
 ### Forma de ejecucion.
 
 - Si has clonado el repositorio y con permisos de ejecucion posicionandote dentro de la carpeta codigo.
 
-      ./Google-drive-ocamlfuse.sh
+      ./Googledrive-ocamlfuse.sh
 
 - Si has instalado el paquete. Lo encontraras en el lanzador.
