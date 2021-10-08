@@ -5,7 +5,7 @@ Version: 1
 Maintainer: sukigsx <mbsistemas.sukigsx@gmail.com>
 Architecture: all
 Priority: optional
-Description: --  Script pensado para ayudarte a la configuracion y gestion de Ocamlfuse --
+Description: Script pensado para ayudarte a la configuracion y gestion de Ocamlfuse
  Instalar/Configurar/Crear conexiones nuevas.
  Ver conexiones actuales.
  Montar/Activar conexiones.
@@ -18,8 +18,8 @@ Description: --  Script pensado para ayudarte a la configuracion y gestion de Oc
 <</CTRL>>
 <<FILES>>
 1
-/home/sukigsx/Documentos/GitHub/Google-drive-ocamlfuse/codigo/ocamlfuse.sukigsx.sh* -> ocamlfuse.sukigsx.sh -> /usr/bin
-/home/sukigsx/Documentos/GitHub/Google-drive-ocamlfuse/iconos/googledrive-ocamlfuse.ico -> googledrive-ocamlfuse.ico -> /usr/share/icons/googledrive-ocamlfuse/
+/home/sukigsx/Documentos/GitHub/Googledrive-ocamlfuse/codigo/ocamlfuse.sukigsx.sh* -> ocamlfuse.sukigsx.sh -> /usr/bin
+/home/sukigsx/Documentos/GitHub/Googledrive-ocamlfuse/iconos/googledrive-ocamlfuse.ico -> googledrive-ocamlfuse.ico -> /usr/share/icons/googledrive-ocamlfuse/
 <</FILES>>
 <<SCRIPTS>>
 <<PREINST>>
