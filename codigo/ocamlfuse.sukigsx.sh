@@ -168,7 +168,7 @@ done
 echo -e "- [${verde}ok${borra_colores}] diff, Para comprara ficheros."
 
 #comprueba aztualiczacion del script
-if [ -e /usr/bin/ocamlfuse.sukigsx.sukigsx.sh ] #comprueba si se ha instalado el script con el deb, comprobando el fichero /usr/bin/inicio.sukigsx.sh
+if [ -e /usr/bin/ocamlfuse.sukigsx.sh ] #comprueba si se ha instalado el script con el deb, comprobando el fichero /usr/bin/inicio.sukigsx.sh
 then
     ruta="/usr/bin"
     mkdir /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
