@@ -244,7 +244,6 @@ case $opcion in
                 echo ""
                 echo -e " ${rojo}NO se ha detectado conexion a internet, No se puede ejecutar el script.${borra_colores}"
                 echo ""
-                read pause
                 exit
         else #intenta instalar
             sudo apt install git -y
@@ -268,7 +267,6 @@ case $opcion in
             echo "";
             echo -e "${verde} Script actualizado, tienes que reiniciar el script para ver los cambios.${borra_colores}";
             echo "";
-            read pasue
             exit;
         else
             ruta=$(pwd)
@@ -283,7 +281,6 @@ case $opcion in
             echo "";
             echo -e "${verde} Script actualizado, tienes que reiniciar el script para ver los cambios.${borra_colores}";
             echo "";
-            read pasue
             exit;
         fi;;
     
