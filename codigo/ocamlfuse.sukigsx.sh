@@ -144,6 +144,56 @@ do
 done
 echo -e "- [${verde}ok${borra_colores}] google-drive-ocamlfuse, control google-drive."
 
+## diff, comando de comparar
+which diff 2>/dev/null 1>/dev/null 0>/dev/null #comprueba si esta el programa llamado programa
+diff=$? #recojemos el 0 o 1 del resultado de which
+contador="1" #ponemos la variable contador a 1
+while [ $diff -gt 0 ] #entra en el bicle si variable programa es 0, no lo ha encontrado which
+do
+    if [ $contador = "4" ] #si el contador es 4 entre en then y sino en else
+    then #si entra en then es porque el contador es igual a 4 y no ha podido instalar
+        echo ""
+        echo -e " ${rojo}NO se ha podido instalar (diff), para comparacion de ficheros."
+        echo -e " Intentelo usted con la orden sudo ${amarillo}sudo apt install diff${rojo}"
+        echo -e " No se puede ejecutar el script.${borra_colores}"
+        echo ""
+        exit
+    else #intenta instalar
+        sudo apt install diff -y 2>/dev/null 1>/dev/null 0>/dev/null
+        let "contador=contador+1" #incrementa la variable contador en 1
+        which diff 2>/dev/null 1>/dev/null 0>/dev/null #comprueba si esta el programa en tu sistema
+        diff=$? ##recojemos el 0 o 1 del resultado de which
+    fi
+done
+echo -e "- [${verde}ok${borra_colores}] diff, Para comprara ficheros."
+
+#comprueba aztualiczacion del script
+if [ -e /usr/bin/ocamlfuse.sukigsx.sukigsx.sh ] #comprueba si se ha instalado el script con el deb, comprobando el fichero /usr/bin/inicio.sukigsx.sh
+then
+    ruta="/usr/bin"
+    mkdir /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
+    git clone https://github.com/sukigsx/Googledrive-ocamlfuse.git /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
+    diff /tmp/com_update/codigo/ocamlfuse.sukigsx.sh $ruta/ocamlfuse.sukigsx.sh 2>/dev/null 1>/dev/null 0>/dev/null
+    if [ $? = "0" ] 2>/dev/null 1>/dev/null 0>/dev/null
+    then
+        echo -e "- [${verde}ok${borra_colores}] script, esta actualizado."
+    else
+        echo -e "- [${rojo}XX${borra_colores}] ${amarillo}script NO actualizado, puedes actualizarlo en la opcion ( 0 ).${borra_colores}";sleep 2
+    fi
+    sudo rm -r /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
+else
+    ruta=$(pwd)
+    mkdir /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
+    git clone https://github.com/sukigsx/Googledrive-ocamlfuse.git /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
+    diff /tmp/com_update/codigo/ocamlfuse.sukigsx.sh $ruta/ocamlfuse.sukigsx.sh 2>/dev/null 1>/dev/null 0>/dev/null
+    if [ $? = "0" ] 2>/dev/null 1>/dev/null 0>/dev/null
+    then
+        echo -e "- [${verde}ok${borra_colores}] script, esta actualizado."
+    else
+        echo -e "- [${rojo}XX${borra_colores}] ${amarillo}script NO actualizado, puedes actualizarlo en la opcion ( 0 ).${borra_colores}";sleep 3
+    fi
+    sudo rm -r /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
+fi
 
 echo ""
 echo -e " ${verde}Todo el software correcto.${borra_colores}"
