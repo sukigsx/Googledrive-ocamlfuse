@@ -498,7 +498,7 @@ case $opcion in
         echo "";
         echo -e "${verde} Explicacion de los menus :${borra_colores}";
         echo -e ""
-        echo -e "  0. ${azul}Actualizacion del script"
+        echo -e "  0. ${azul}Actualizacion del script.${borra_colores}"
         echo -e "";
         echo -e "  1. ${azul}Instalar y configurar Ocamlfuse:"
         echo -e "     ${turquesa}Instala lo necesario para configurar el programa, solo tienes que seguir los pasos."
