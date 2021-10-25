@@ -267,7 +267,7 @@ case $opcion in
             echo "";
             echo -e "${verde} Script actualizado, tienes que reiniciar el script para ver los cambios.${borra_colores}";
             echo "";
-            exit;
+            ctrl_c;
         else
             ruta=$(pwd)
             cd /tmp
@@ -281,7 +281,7 @@ case $opcion in
             echo "";
             echo -e "${verde} Script actualizado, tienes que reiniciar el script para ver los cambios.${borra_colores}";
             echo "";
-            exit;
+            ctrl_c;
         fi;;
     
     1)  #Configurar/Crear conexiones nuevas
