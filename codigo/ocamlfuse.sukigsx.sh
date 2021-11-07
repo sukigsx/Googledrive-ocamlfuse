@@ -219,7 +219,7 @@ case $opcion in
         echo ""
         read -p " Introduce el nombre de la carpeta donde sincronizar google drive /home/$(whoami)/ -->> " carpeta_drive;
         echo " La ruta de creaccion de carpeta sera /home/$(whoami)/$carpeta_drive/";
-        echo -n " Los datos son correctos ? ( S/N ) -->> ";
+        echo -n " Los datos son correctos ? (s/n) -->> ";
         read sino;
         if [ $sino = "S" ] || [ $sino = "s" ] 2>/dev/null 1>/dev/null 0>/dev/null
         then
@@ -238,7 +238,7 @@ case $opcion in
                 echo " Se montara automaticamente al reiniciar, pero si tu conexion a internet falla, el equipo se te relentizara."
                 echo -e " Tendras que parar el servicio manualmente o conectarlo a internet.${borra_colores}"
                 echo ""
-                read -p " Una vez que sabes esto, Quieres incluirlo en crontab. (S o N) ? " sino
+                read -p " Una vez que sabes esto, Quieres incluirlo en crontab. (s/n) ? " sino
                 if [ $sino = "s" ] || [ $sino = "S" ]
                 then                
                 	(crontab -l 2>/dev/null; echo "#google-drive-ocalfuse, $carpeta_drive  cada reinicio.") | crontab -
@@ -273,7 +273,7 @@ case $opcion in
                 echo " Se montara automaticamente al reiniciar, pero si tu conexion a internet falla, el equipo se te relentizara."
                 echo -e " Tendras que parar el servicio manualmente o conectarlo a internet.${borra_colores}"
                 echo ""
-                read -p " Una vez que sabes esto, Quieres incluirlo en crontab. (S o N) ? " sino
+                read -p " Una vez que sabes esto, Quieres incluirlo en crontab. (s/n) ? " sino
                 if [ $sino = "s" ] || [ $sino = "S" ] 2>/dev/null 1>/dev/null 0>/dev/null
                 then                
                 	(crontab -l 2>/dev/null; echo "#google-drive-ocalfuse, $carpeta_drive  cada reinicio.") | crontab -
@@ -414,7 +414,7 @@ case $opcion in
         echo ""
         echo " Proyecto > https://github.com/astrada/google-drive-ocamlfuse"
         echo ""
-        read -p " Quieres ver la pagina del creador ? (S/N) -->> " correcto;
+        read -p " Quieres ver la pagina del creador ? (s/n) -->> " correcto;
             if [ $correcto = "S" ] || [ $correcto = "s" ] 2>/dev/null 1>/dev/null 0>/dev/null;
             then
                 firefox https://github.com/astrada/google-drive-ocamlfuse;
