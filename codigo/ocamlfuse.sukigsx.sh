@@ -109,7 +109,7 @@ then
             then
                 echo -e " [${verde}ok${borra_colores}] script, esta actualizado."
             else
-                echo -e " [${rojo}X${borra_colores}] ${amarillo}script NO actualizado, puedes actualizarlo en la opcion ( 0 ).${borra_colores}";sleep 2
+                echo -e " [${rojo}X${borra_colores}] ${amarillo}script NO aaaaaaactualizado, puedes actualizarlo en la opcion ( 0 ).${borra_colores}";sleep 2
             fi
             rm -r /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
         else
@@ -121,7 +121,7 @@ then
             then
                 echo -e " [${verde}ok${borra_colores}] script, esta actualizado."
             else
-                echo -e " [${rojo}X${borra_colores}] ${amarillo}script NO actualizado, puedes actualizarlo en la opcion ( 0 ).${borra_colores}";sleep 3
+                echo -e " [${rojo}X${borra_colores}] ${amarillo}script NO aaaaaactualizado, puedes actualizarlo en la opcion ( 0 ).${borra_colores}";sleep 3
             fi
             rm -r /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
         fi
