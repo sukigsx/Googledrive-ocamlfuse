@@ -27,109 +27,172 @@ exit
 
 
 # empieza lo gordo
-##verificacion de conexion y tambien de fostware necesario
 clear
-echo -e ""
-echo -e "${verde} Verificando software necesario.${borra_colores}"
-echo -e ""
-## Vericica conexion a internet
-    if ping -c1 google.com &>/dev/null;
-    then
-        echo -e " [${verde}ok${borra_colores}] Conexion a internet."
-        conexion="si" #sabemos si tenemos conexion a internet o no
-    else
-        echo -e " [${rojo}XX${borra_colores}] Conexion a internet."
-        conexion="no" #sabemos si tenemos conexion a internet o no
-    fi
-    
-for paquete in git wmctrl figlet google-drive-ocamlfuse diff #ponemos el fostware a instalar separado por espacios
-do
-    which $paquete 2>/dev/null 1>/dev/null 0>/dev/null #comprueba si esta el programa llamado programa
-    sino=$? #recojemos el 0 o 1 del resultado de which
-    contador="1" #ponemos la variable contador a 1
-    while [ $sino -gt 0 ] #entra en el bicle si variable programa es 0, no lo ha encontrado which
-    do
-        if [ $contador = "4" ] || [ $conexion = "no" ] #si el contador es 4 entre en then y sino en else
-        then #si entra en then es porque el contador es igual a 4 y no ha podido instalar o no hay conexion a internet
-            echo ""
-            echo -e " ${amarillo}NO se ha podido instalar ($paquete).${borra_colores}"
-            echo -e " ${amarillo}Intentelo usted con la orden:${borra_colores}"
-            echo -e " ${rojo}-- sudo apt install $paquete --${borra_colores}"
-            echo -e ""
-            echo -e " ${rojo}No se puede ejecutar el script.${borra_colores}"
-            echo ""
-            exit
-        else #intenta instalar
-            if [ $paquete = "google-drive-ocamlfuse" ]
-            then
-                echo " Instalando $paquete. Intento $contador/3."
-                sudo add-apt-repository -y ppa:alessandro-strada/ppa 2>/dev/null 1>/dev/null 0>/dev/null
-                sudo apt install $paquete -y 2>/dev/null 1>/dev/null 0>/dev/null
-                let "contador=contador+1" #incrementa la variable contador en 1
-                which $paquete 2>/dev/null 1>/dev/null 0>/dev/null #comprueba si esta el programa en tu sistema
-                sino=$? ##recojemos el 0 o 1 del resultado de which
-            else
-                echo " Instalando $paquete. Intento $contador/3."
-                sudo apt install $paquete -y 2>/dev/null 1>/dev/null 0>/dev/null
-                let "contador=contador+1" #incrementa la variable contador en 1
-                which $paquete 2>/dev/null 1>/dev/null 0>/dev/null #comprueba si esta el programa en tu sistema
-                sino=$? ##recojemos el 0 o 1 del resultado de which
-            fi
-        fi
-done
-    echo -e " [${verde}ok${borra_colores}] $paquete."
+echo ""
+echo -e "${amarillo} Comprobando software necesario.${borra_colores}"
+echo ""
 
-done
-if [ $conexion = "no" ]
+## Vericica conexion a internet
+if ping -c1 google.com &>/dev/null;
 then
-    echo -e ""
-    echo -e "${rojo} Este script no se puede ejecutar correctamente."
-    echo -e " Si NO dispone de conexion a internet.${borra_colores}"
-    echo -e ""
-    exit
+    echo -e "- [${verde}ok${borra_colores}] Conexion a internet."
 else
-    echo -e ""
-    echo -e "${verde} Continuamos...${borra_colores}"
-    sleep 2
+    clear
+    echo ""
+    echo -e "${rojo} NO se ha detectado conexion a internet, No se puede ejecutar el script.${borra_colores}"
+    echo -e "${rojo} Pulsa una tecla para continuar.${borra_colores}"
+    echo ""
+    read pasue
+    exit
 fi
 
 
-#comprueba actualiczacion del script
+## verificar software necesario
 
-repositorio="https://github.com/sukigsx/Googledrive-ocamlfuse.git" #variable de la direccion del repositorio del script
-if wget -S --spider $repositorio &>/dev/null; #comprueba que exista el repositorio
+## git, para la actualizacion del script
+which git 2>/dev/null 1>/dev/null 0>/dev/null #comprueba si esta el programa llamado programa
+git=$? #recojemos el 0 o 1 del resultado de which
+contador="1" #ponemos la variable contador a 1
+while [ $git -gt 0 ] #entra en el bicle si variable programa es 0, no lo ha encontrado which
+do
+    if [ $contador = "4" ] #si el contador es 4 entre en then y sino en else
+    then #si entra en then es porque el contador es igual a 4 y no ha podido instalar
+        echo ""
+        echo -e " ${rojo}NO se ha podido instalar (git), para la actualizacion del script."
+        echo -e " Intentelo usted con la orden sudo ${amarillo}sudo apt install git${rojo}"
+        echo -e " No se puede ejecutar el script.${borra_colores}"
+        echo ""
+        exit
+    else #intenta instalar
+        sudo apt install git -y 2>/dev/null 1>/dev/null 0>/dev/null
+        let "contador=contador+1" #incrementa la variable contador en 1
+        which git 2>/dev/null 1>/dev/null 0>/dev/null #comprueba si esta el programa en tu sistema
+        git=$? ##recojemos el 0 o 1 del resultado de which
+    fi
+done
+echo -e "- [${verde}ok${borra_colores}] Git, Para actualizar script."
+
+## wmctrl, para el control del tamaño del terminal
+which wmctrl 2>/dev/null 1>/dev/null 0>/dev/null #comprueba si esta el programa llamado programa
+wmctrl=$? #recojemos el 0 o 1 del resultado de which
+contador="1" #ponemos la variable contador a 1
+while [ $wmctrl -gt 0 ] #entra en el bicle si variable programa es 0, no lo ha encontrado which
+do
+    if [ $contador = "4" ] #si el contador es 4 entre en then y sino en else
+    then #si entra en then es porque el contador es igual a 4 y no ha podido instalar
+        echo ""
+        echo -e " ${rojo}NO se ha podido instalar (wmctrl), para el control de la pantalla del terminal."
+        echo -e " Intentelo usted con la orden sudo ${amarillo}sudo apt install wmctrl${rojo}"
+        echo -e " No se puede ejecutar el script.${borra_colores}"
+        echo ""
+        exit
+    else #intenta instalar
+        sudo apt install wmctrl -y 2>/dev/null 1>/dev/null 0>/dev/null
+        let "contador=contador+1" #incrementa la variable contador en 1
+        which wmctrl 2>/dev/null 1>/dev/null 0>/dev/null #comprueba si esta el programa en tu sistema
+        wmctrl=$? ##recojemos el 0 o 1 del resultado de which
+    fi
+done
+echo -e "- [${verde}ok${borra_colores}] wmctrl, Control de pantalla."
+
+## figlet, para los baners
+which figlet 2>/dev/null 1>/dev/null 0>/dev/null #comprueba si esta el programa llamado programa
+figlet=$? #recojemos el 0 o 1 del resultado de which
+contador="1" #ponemos la variable contador a 1
+while [ $figlet -gt 0 ] #entra en el bicle si variable programa es 0, no lo ha encontrado which
+do
+    if [ $contador = "4" ] #si el contador es 4 entre en then y sino en else
+    then #si entra en then es porque el contador es igual a 4 y no ha podido instalar
+        echo ""
+        echo -e " ${rojo}NO se ha podido instalar (figlet), para los baners del script."
+        echo -e " Intentelo usted con la orden sudo ${amarillo}sudo apt install figlet${rojo}"
+        echo -e " No se puede ejecutar el script.${borra_colores}"
+        echo ""
+        exit
+    else #intenta instalar
+        sudo apt install figlet -y 2>/dev/null 1>/dev/null 0>/dev/null
+        let "contador=contador+1" #incrementa la variable contador en 1
+        which figlet 2>/dev/null 1>/dev/null 0>/dev/null #comprueba si esta el programa en tu sistema
+        figlet=$? ##recojemos el 0 o 1 del resultado de which
+    fi
+done
+echo -e "- [${verde}ok${borra_colores}] figlet, Baners de terminal."
+
+## ocamlfuse, para los baners
+which google-drive-ocamlfuse 2>/dev/null 1>/dev/null 0>/dev/null #comprueba si esta el programa llamado programa
+ocamlfuse=$? #recojemos el 0 o 1 del resultado de which
+contador="1" #ponemos la variable contador a 1
+while [ $ocamlfuse -gt 0 ] #entra en el bicle si variable programa es 0, no lo ha encontrado which
+do
+    if [ $contador = "4" ] #si el contador es 4 entre en then y sino en else
+    then #si entra en then es porque el contador es igual a 4 y no ha podido instalar
+        echo ""
+        echo -e " ${rojo}NO se ha podido instalar (google-drive-ocamlfuse), de control Google-drive."
+        echo -e ""
+        echo -e " No se puede ejecutar el script.${borra_colores}"
+        echo ""
+        exit
+    else #intenta instalar
+        sudo add-apt-repository ppa:alessandro-strada/ppa -y 2>/dev/null 1>/dev/null 0>/dev/null
+        sudo apt update 2>/dev/null 1>/dev/null 0>/dev/null
+        sudo apt-get install google-drive-ocamlfuse -y 2>/dev/null 1>/dev/null 0>/dev/null
+        which google-drive-ocamlfuse 2>/dev/null 1>/dev/null 0>/dev/null
+        let "contador=contador+1" #incrementa la variable contador en 1
+        which google-drive-ocamlfuse 2>/dev/null 1>/dev/null 0>/dev/null #comprueba si esta el programa en tu sistema
+        ocamlfuse=$? ##recojemos el 0 o 1 del resultado de which
+    fi
+done
+echo -e "- [${verde}ok${borra_colores}] google-drive-ocamlfuse, control google-drive."
+
+## diff, comando de comparar
+which diff 2>/dev/null 1>/dev/null 0>/dev/null #comprueba si esta el programa llamado programa
+diff=$? #recojemos el 0 o 1 del resultado de which
+contador="1" #ponemos la variable contador a 1
+while [ $diff -gt 0 ] #entra en el bicle si variable programa es 0, no lo ha encontrado which
+do
+    if [ $contador = "4" ] #si el contador es 4 entre en then y sino en else
+    then #si entra en then es porque el contador es igual a 4 y no ha podido instalar
+        echo ""
+        echo -e " ${rojo}NO se ha podido instalar (diff), para comparacion de ficheros."
+        echo -e " Intentelo usted con la orden sudo ${amarillo}sudo apt install diff${rojo}"
+        echo -e " No se puede ejecutar el script.${borra_colores}"
+        echo ""
+        exit
+    else #intenta instalar
+        sudo apt install diff -y 2>/dev/null 1>/dev/null 0>/dev/null
+        let "contador=contador+1" #incrementa la variable contador en 1
+        which diff 2>/dev/null 1>/dev/null 0>/dev/null #comprueba si esta el programa en tu sistema
+        diff=$? ##recojemos el 0 o 1 del resultado de which
+    fi
+done
+echo -e "- [${verde}ok${borra_colores}] diff, Para comprara ficheros."
+
+#comprueba aztualiczacion del script
+if [ -e /usr/bin/ocamlfuse.sukigsx.sh ] #comprueba si se ha instalado el script con el deb, comprobando el fichero /usr/bin/inicio.sukigsx.sh
 then
-        if [ -e /usr/bin/$0 ] #comprueba si se ha instalado el script con el deb, comprobando el fichero /usr/bin/nombre_del_script.sh
-        then
-            ruta="/usr/bin"
-            mkdir /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
-            git clone $repositorio /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
-            diff /tmp/com_update/codigo/$0 $ruta/$0 2>/dev/null 1>/dev/null 0>/dev/null
-            if [ $? = "0" ] 2>/dev/null 1>/dev/null 0>/dev/null
-            then
-                echo -e " [${verde}ok${borra_colores}] script, esta actualizado."
-            else
-                echo -e " [${rojo}X${borra_colores}] ${amarillo}script NO 1ctualizado, puedes actualizarlo en la opcion ( 0 ).${borra_colores}";sleep 2
-            fi
-            rm -r /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
-        else
-            ruta=$(pwd)
-            mkdir /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
-            git clone $repositorio /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
-            diff /tmp/com_update/codigo/$0 $ruta/$0 2>/dev/null 1>/dev/null 0>/dev/null
-            if [ $? = "0" ] 2>/dev/null 1>/dev/null 0>/dev/null
-            then
-                echo -e " [${verde}ok${borra_colores}] script, esta actualizado."
-            else
-                echo -e " [${rojo}X${borra_colores}] ${amarillo}script NO 2ctualizado, puedes actualizarlo en la opcion ( 0 ).${borra_colores}";sleep 3
-            fi
-            rm -r /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
-        fi
+    ruta="/usr/bin"
+    mkdir /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
+    git clone https://github.com/sukigsx/Googledrive-ocamlfuse.git /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
+    diff /tmp/com_update/codigo/ocamlfuse.sukigsx.sh $ruta/ocamlfuse.sukigsx.sh 2>/dev/null 1>/dev/null 0>/dev/null
+    if [ $? = "0" ] 2>/dev/null 1>/dev/null 0>/dev/null
+    then
+        echo -e "- [${verde}ok${borra_colores}] script, esta actualizado."
+    else
+        echo -e "- [${rojo}XX${borra_colores}] ${amarillo}script NO actualizado, puedes actualizarlo en la opcion ( 0 ).${borra_colores}";sleep 2
+    fi
+    sudo rm -r /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
 else
-        echo ""
-        echo -e " ${amarillo}El repositorio (${rojo} $repositorio ${amarillo}), NO esta accesible.${borra_colores}"
-        echo -e " ${amarillo}Imposible la comprobacion de actualizaciones del script.${borra_colores}"
-        echo ""
+    ruta=$(pwd)
+    mkdir /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
+    git clone https://github.com/sukigsx/Googledrive-ocamlfuse.git /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
+    diff /tmp/com_update/codigo/ocamlfuse.sukigsx.sh $ruta/ocamlfuse.sukigsx.sh 2>/dev/null 1>/dev/null 0>/dev/null
+    if [ $? = "0" ] 2>/dev/null 1>/dev/null 0>/dev/null
+    then
+        echo -e "- [${verde}ok${borra_colores}] script, esta actualizado."
+    else
+        echo -e "- [${rojo}XX${borra_colores}] ${amarillo}script NO actualizado, puedes actualizarlo en la opcion ( 0 ).${borra_colores}";sleep 3
+    fi
+    sudo rm -r /tmp/com_update 2>/dev/null 1>/dev/null 0>/dev/null
 fi
 
 echo ""
@@ -204,8 +267,7 @@ case $opcion in
             echo "";
             echo -e "${verde} Script actualizado, tienes que reiniciar el script para ver los cambios.${borra_colores}";
             echo "";
-            read -p " Pulsa una tecla para continuar." pause
-            ctrl_c;
+            exit;
         else
             ruta=$(pwd)
             cd /tmp
@@ -219,8 +281,7 @@ case $opcion in
             echo "";
             echo -e "${verde} Script actualizado, tienes que reiniciar el script para ver los cambios.${borra_colores}";
             echo "";
-            read -p " Pulsa una tecla para continuar." pause
-            ctrl_c;
+            exit;
         fi;;
     
     1)  #Configurar/Crear conexiones nuevas
@@ -230,7 +291,7 @@ case $opcion in
         echo ""
         read -p " Introduce el nombre de la carpeta donde sincronizar google drive /home/$(whoami)/ -->> " carpeta_drive;
         echo " La ruta de creaccion de carpeta sera /home/$(whoami)/$carpeta_drive/";
-        echo -n " Los datos son correctos ? (s/n) -->> ";
+        echo -n " Los datos son correctos ? ( S/N ) -->> ";
         read sino;
         if [ $sino = "S" ] || [ $sino = "s" ] 2>/dev/null 1>/dev/null 0>/dev/null
         then
@@ -249,7 +310,7 @@ case $opcion in
                 echo " Se montara automaticamente al reiniciar, pero si tu conexion a internet falla, el equipo se te relentizara."
                 echo -e " Tendras que parar el servicio manualmente o conectarlo a internet.${borra_colores}"
                 echo ""
-                read -p " Una vez que sabes esto, Quieres incluirlo en crontab. (s/n) ? " sino
+                read -p " Una vez que sabes esto, Quieres incluirlo en crontab. (S o N) ? " sino
                 if [ $sino = "s" ] || [ $sino = "S" ]
                 then                
                 	(crontab -l 2>/dev/null; echo "#google-drive-ocalfuse, $carpeta_drive  cada reinicio.") | crontab -
@@ -284,7 +345,7 @@ case $opcion in
                 echo " Se montara automaticamente al reiniciar, pero si tu conexion a internet falla, el equipo se te relentizara."
                 echo -e " Tendras que parar el servicio manualmente o conectarlo a internet.${borra_colores}"
                 echo ""
-                read -p " Una vez que sabes esto, Quieres incluirlo en crontab. (s/n) ? " sino
+                read -p " Una vez que sabes esto, Quieres incluirlo en crontab. (S o N) ? " sino
                 if [ $sino = "s" ] || [ $sino = "S" ] 2>/dev/null 1>/dev/null 0>/dev/null
                 then                
                 	(crontab -l 2>/dev/null; echo "#google-drive-ocalfuse, $carpeta_drive  cada reinicio.") | crontab -
@@ -425,7 +486,7 @@ case $opcion in
         echo ""
         echo " Proyecto > https://github.com/astrada/google-drive-ocamlfuse"
         echo ""
-        read -p " Quieres ver la pagina del creador ? (s/n) -->> " correcto;
+        read -p " Quieres ver la pagina del creador ? (S/N) -->> " correcto;
             if [ $correcto = "S" ] || [ $correcto = "s" ] 2>/dev/null 1>/dev/null 0>/dev/null;
             then
                 firefox https://github.com/astrada/google-drive-ocamlfuse;
@@ -437,7 +498,7 @@ case $opcion in
         echo "";
         echo -e "${verde} Explicacion de los menus :${borra_colores}";
         echo -e ""
-        echo -e "  0. ${azul}Actualizacion del script.${borra_colores}"
+        echo -e "  0. ${azul}Actualizacion del script"
         echo -e "";
         echo -e "  1. ${azul}Instalar y configurar Ocamlfuse:"
         echo -e "     ${turquesa}Instala lo necesario para configurar el programa, solo tienes que seguir los pasos."
